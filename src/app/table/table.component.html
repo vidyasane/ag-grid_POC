@@ -1,0 +1,16 @@
+<div class="mt-5">
+    <button (click)="ExportData()" class="btn btn-primary ml-3">Export</button>
+    <input type="file" (change)="ImportData($event)" class="ml-3">
+    <select (ngModelChange)="rangeSearch($event)" [ngModel]="selectedItem">
+        <option disabled value="">Select Oppo Suits</option>
+        <option>Choose range</option>
+        <option *ngFor="let range of searchData">{{range.range}}</option>
+    </select>
+    <input type="text" placeholder="search" class="ml-3" (ngModelChange)="search($event)" [ngModel]="data">
+    <div class="ml-3 mt-3">
+        <ag-grid-angular id="myGrid" style="width: 604px; height: 177px;" class="ag-theme-alpine"
+            [rowData]="tablerowData | filter : data | search : rangeFirstValue : rangeSecondValue"
+            (gridReady)="onGridReady($event)" [columnDefs]="columnDefs">
+        </ag-grid-angular>
+    </div>
+</div>
